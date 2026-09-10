@@ -22,7 +22,7 @@ type PlayModeContextValue = {
 
 const PlayModeContext = createContext<PlayModeContextValue | null>(null);
 
-const KEY = "monke:play-mode";
+const KEY = "yonke:play-mode";
 
 export function PlayModeProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<PlayMode>("demo");

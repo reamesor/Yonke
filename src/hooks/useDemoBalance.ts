@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { DEMO_PLAY_SOL } from "@/lib/features";
 import { lamportsToSol, solToLamports } from "@/lib/solana/lamports";
 
-const KEY = "monke:demo-sol";
+const KEY = "yonke:demo-sol";
 
 function readDemo(): number {
   if (typeof window === "undefined") return DEMO_PLAY_SOL;

@@ -1,48 +1,57 @@
 import type { Metadata } from "next";
-import { Archivo, Bagel_Fat_One } from "next/font/google";
+import { Noto_Sans_JP, Silkscreen } from "next/font/google";
 import { AppProviders } from "@/components/AppProviders";
-import { Wordmark } from "@/components/Wordmark";
 import "./globals.css";
 
-const archivo = Archivo({
+const ticket = Silkscreen({
   subsets: ["latin"],
-  weight: ["500", "600", "800"],
-  variable: "--font-archivo",
+  weight: ["400", "700"],
+  variable: "--font-silkscreen",
 });
 
-const bagel = Bagel_Fat_One({
+const jp = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-bagel",
+  weight: ["900"],
+  variable: "--font-noto-jp",
 });
 
 export const metadata: Metadata = {
-  title: "Monke — Colors",
-  description: "Monke is a Colors betting game. Warm paper, grain, pastel ghosts.",
+  title: "Yonke — Colors",
+  description: "Yonke is a Colors betting game. Dark grain, NFT ghosts, same Colors math.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${archivo.variable} ${bagel.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${ticket.variable} ${ticket.className} ${jp.variable} h-full antialiased`}>
       <body className="min-h-full">
         <AppProviders>
           <div className="shell">
+            <div className="grain" aria-hidden />
+            <div className="hero-mark" aria-hidden>
+              YONKE
+            </div>
             <header className="topbar">
-              <div className="brand-cluster">
-                <a href="/" aria-label="Monke">
-                  <Wordmark size="nav" />
-                </a>
-                <p className="chip">Colors</p>
-              </div>
               <nav className="site-nav" aria-label="Primary">
-                <a href="/">Play</a>
-                <a href="#treasury">Treasury</a>
-                <a href="#fairness">Fairness</a>
+                <a href="/">
+                  <span className="menu-digit">[01]</span> Play
+                </a>
+                <a href="#treasury">
+                  <span className="menu-digit">[02]</span> Treasury
+                </a>
+                <a href="#fairness">
+                  <span className="menu-digit">[03]</span> Fairness
+                </a>
               </nav>
+              <a className="nav-cta" href="#play">
+                Play
+              </a>
             </header>
+            <div className="spec-row">
+              <span className="spec-jp">ヨンケ</span>
+              <span>PN: YNK-0001 DO NOT REMOVE DURING OPERATION</span>
+              <span>BATCH: 09/2026-A1 TOL: ±0.02MM</span>
+              <span>SN: NFT · COLORS</span>
+            </div>
             {children}
           </div>
         </AppProviders>

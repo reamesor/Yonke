@@ -1,5 +1,5 @@
 /**
- * Monke Colors palette + PER_COLOR settlement.
+ * Yonke Colors palette + PER_COLOR settlement.
  * Internal SOL math is lamport-integer (see engineLamports.ts).
  */
 
@@ -64,7 +64,7 @@ export const HOUSE_EDGE = 0.05;
  *   1 match → return bet × 2
  *   2 matches → bet × 4
  *   3 matches → bet × 6
- * Monke separately takes 5% of bet cost every round for the treasury.
+ * Yonke separately takes 5% of bet cost every round for the treasury.
  */
 export const MATCH_PAYOUT = 2;
 

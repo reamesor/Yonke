@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { Ghost, GhostPeek } from "@/components/Ghost";
+import { Ghost } from "@/components/Ghost";
 import { usePlayMode } from "@/components/play/PlayModeContext";
 import { useCustody } from "@/hooks/useCustody";
 import { useDemoBalance } from "@/hooks/useDemoBalance";
@@ -28,8 +28,8 @@ import { applyPoolRound, EMPTY_TREASURY, type TreasuryState } from "@/lib/treasu
 
 const BET_PRESETS = [0.01, 0.05, 0.1, 0.25] as const;
 const AUTOBET = [0, 5, 10, 20, -1] as const;
-const TREASURY_KEY = "monke:treasury";
-const SESSION_KEY = "monke:client-session";
+const TREASURY_KEY = "yonke:treasury";
+const SESSION_KEY = "yonke:client-session";
 
 type Fairness = {
   serverSeedHash: string;
@@ -416,7 +416,7 @@ export function ColorsGame() {
 
   return (
     <div className="play">
-      <section className="stage">
+      <section className="stage" id="play">
         <div className="dice-row">
           {(dice ?? ["yellow", "orange", "pink"]).map((face, i) => (
             <div className="die" key={i}>
@@ -429,7 +429,12 @@ export function ColorsGame() {
             </div>
           ))}
         </div>
-        <p className="prompt text-center">{prompt || (phase === "rolling" ? "Rolling…" : "Pick up to three colors")}</p>
+        <p className="prompt">{prompt || (phase === "rolling" ? "Rolling…" : "Pick up to three colors")}</p>
+
+        <div className="section-head">
+          <span className="section-spine">What you pick</span>
+          <span className="section-rule" />
+        </div>
 
         <div className="color-grid" role="group" aria-label="Colors">
           {COLOR_KEYS.map((c) => {
@@ -449,22 +454,30 @@ export function ColorsGame() {
           })}
         </div>
 
-        <div className="meters" id="treasury" aria-label="Treasury">
+        <div className="section-head" id="treasury">
+          <span className="section-spine">Treasury</span>
+          <span className="section-rule" />
+        </div>
+        <div className="meters" aria-label="Treasury">
           <div className="meter">
+            <span className="meter-num">1</span>
             <div className="kicker">Session cut</div>
             <b>{formatSol(treasury.total)}</b>
           </div>
           <div className="meter">
+            <span className="meter-num">2</span>
             <div className="kicker">Play pool</div>
             <b>{formatSol(treasury.pool)}</b>
           </div>
           <div className="meter">
+            <span className="meter-num">3</span>
             <div className="kicker">Burn / Believers</div>
             <b>
               {formatSol(treasury.burn)} / {formatSol(treasury.believers)}
             </b>
           </div>
           <div className="meter">
+            <span className="meter-num">4</span>
             <div className="kicker">Build</div>
             <b>{formatSol(treasury.build)}</b>
           </div>
@@ -495,14 +508,14 @@ export function ColorsGame() {
       <aside className="panel">
         <div>
           <div className="kicker">
-            Monke · {modeLabel}
+            Yonke · {modeLabel}
             {isDevnet && connected ? ` · ${publicKey?.toBase58().slice(0, 4)}…` : ""}
           </div>
           <div className="balance-amt">
             {formatSol(balance)}
             <span className="balance-unit">SOL</span>
           </div>
-          <p className="mt-1 text-[12px] text-[var(--ink-dim)]">
+          <p className="mt-1 text-[12px] text-[var(--muted)]">
             {isDevnet
               ? playUnlocked
                 ? `Wallet ${custody.walletSol != null ? formatSol(custody.walletSol) : "—"} SOL · play pot above`
@@ -617,13 +630,11 @@ export function ColorsGame() {
         )}
       </aside>
 
-      <GhostPeek />
-
       {dialogOpen && result && (
         <div className="modal-scrim" role="dialog" aria-modal>
           <div className="modal">
             <div className="kicker">This round</div>
-            <p className="mt-2 font-[family-name:var(--font-display)] text-[40px] leading-none">
+            <p className="mt-2 text-[40px] leading-none">
               {result.matches > 0 ? "Hit" : "Miss"}
             </p>
             <div className="cost-break mt-4">
@@ -678,7 +689,7 @@ export function ColorsGame() {
                 {result.matches === 0 ? " · cut still taken on a loss" : ""}
               </p>
             )}
-            <p className="mt-1 text-[12px] text-[var(--ink-dim)]">
+            <p className="mt-1 text-[12px] text-[var(--muted)]">
               {HOUSE_EDGE * 100}% of bet cost every roll. Wins pay the full ladder.
             </p>
             <button type="button" className="btn btn-accent mt-4 w-full" onClick={closeResult}>
@@ -742,7 +753,7 @@ export function ColorsGame() {
                       Devnet faucet
                     </a>
                     {custody.disabledReason && (
-                      <p className="mt-2 text-[12px] text-[var(--ink-dim)]">{custody.disabledReason}</p>
+                      <p className="mt-2 text-[12px] text-[var(--muted)]">{custody.disabledReason}</p>
                     )}
                   </>
                 )}

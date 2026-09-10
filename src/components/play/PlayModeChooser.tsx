@@ -17,7 +17,7 @@ export function PlayModeChooser({ onChoose }: Props) {
         <p id="mode-title" className="label mt-6">
           Choose how you play
         </p>
-        <p className="mt-3 text-[15px] leading-snug text-[var(--ink-dim)]">
+        <p className="mt-3 text-[15px] leading-snug text-[var(--muted)]">
           Same colors math either way. DEMO is a local pot. DEVNET needs a
           wallet, a signed proof, then a deposit — never mainnet.
         </p>
