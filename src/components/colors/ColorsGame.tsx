@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { Ghost, GhostPeek } from "@/components/Ghost";
@@ -34,8 +28,8 @@ import { applyPoolRound, EMPTY_TREASURY, type TreasuryState } from "@/lib/treasu
 
 const BET_PRESETS = [0.01, 0.05, 0.1, 0.25] as const;
 const AUTOBET = [0, 5, 10, 20, -1] as const;
-const TREASURY_KEY = "yonke:treasury";
-const SESSION_KEY = "yonke:client-session";
+const TREASURY_KEY = "monke:treasury";
+const SESSION_KEY = "monke:client-session";
 
 type Fairness = {
   serverSeedHash: string;
@@ -445,7 +439,6 @@ export function ColorsGame() {
                 key={c}
                 type="button"
                 className={`color-chip ${on ? "is-on" : ""}`}
-                style={{ "--chip": COLOR_HEX[c] } as CSSProperties}
                 onClick={() => toggleColor(c)}
                 aria-pressed={on}
               >
@@ -502,7 +495,7 @@ export function ColorsGame() {
       <aside className="panel">
         <div>
           <div className="kicker">
-            Yonke · {modeLabel}
+            Monke · {modeLabel}
             {isDevnet && connected ? ` · ${publicKey?.toBase58().slice(0, 4)}…` : ""}
           </div>
           <div className="balance-amt">
@@ -615,7 +608,7 @@ export function ColorsGame() {
           </button>
         )}
         <button type="button" className="btn" onClick={() => playMode.reset()}>
-          Switch DEMO / DEVNET
+          Switch to {isDevnet ? "DEMO" : "DEVNET"}
         </button>
         {connected && (
           <button type="button" className="btn" onClick={() => void disconnect()}>

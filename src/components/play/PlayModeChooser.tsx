@@ -12,7 +12,7 @@ export function PlayModeChooser({ onChoose }: Props) {
   return (
     <div className="chooser" role="dialog" aria-labelledby="mode-title">
       <div className="chooser-card">
-        <Ghost color="pink" look="halo" className="mx-auto mb-2 w-24" />
+        <Ghost color="pink" className="mx-auto mb-2 w-24" />
         <Wordmark size="hero" />
         <p id="mode-title" className="label mt-6">
           Choose how you play

@@ -3,7 +3,7 @@ import bs58 from "bs58";
 
 const CHALLENGE_TTL_MS = 5 * 60 * 1000;
 const SESSION_TTL_MS = 12 * 60 * 60 * 1000;
-const CHALLENGE_PREFIX = "yonke:siws:chal:";
+const CHALLENGE_PREFIX = "monke:siws:chal:";
 
 export type SiwsChallenge = {
   nonce: string;
@@ -23,7 +23,7 @@ function sessionSecret(): string {
   const s =
     process.env.SIWS_SESSION_SECRET?.trim() ||
     process.env.SERVER_SEED_SECRET?.trim();
-  if (!s) return "yonke-dev-siws-secret-change-me";
+  if (!s) return "monke-dev-siws-secret-change-me";
   return s;
 }
 
@@ -43,7 +43,7 @@ function appDomain(reqUrl?: string): string {
       /* fall through */
     }
   }
-  return "yonke.game";
+  return "monke.game";
 }
 
 const memoryChallenges = new Map<
@@ -70,7 +70,7 @@ export function buildSiwsMessage(opts: {
     `${opts.domain} wants you to sign in with your Solana account:`,
     opts.pubkey,
     "",
-    "Sign this message to prove wallet ownership for Yonke.",
+    "Sign this message to prove wallet ownership for Monke.",
     "This does not move funds or approve any transaction.",
     "",
     `Nonce: ${opts.nonce}`,
@@ -223,5 +223,5 @@ export function parseSessionToken(
   }
 }
 
-export const SIWS_COOKIE = "yonke_siws";
+export const SIWS_COOKIE = "monke_siws";
 export const SIWS_SESSION_TTL_MS = SESSION_TTL_MS;

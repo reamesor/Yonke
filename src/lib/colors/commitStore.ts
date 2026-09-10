@@ -16,7 +16,7 @@ export type CommitRecord = {
 };
 
 const MEM = new Map<string, CommitRecord>();
-const KEY_PREFIX = "yonke:fairness:commit:";
+const KEY_PREFIX = "monke:fairness:commit:";
 
 const DATA_DIR = path.join(process.cwd(), ".data");
 

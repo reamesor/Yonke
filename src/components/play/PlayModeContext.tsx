@@ -13,7 +13,7 @@ import {
 export type PlayMode = "demo" | "devnet";
 
 type PlayModeContextValue = {
-  mode: PlayMode | null;
+  mode: PlayMode;
   chose: boolean;
   ready: boolean;
   setMode: (mode: PlayMode) => void;
@@ -22,16 +22,16 @@ type PlayModeContextValue = {
 
 const PlayModeContext = createContext<PlayModeContextValue | null>(null);
 
-const KEY = "yonke:play-mode";
+const KEY = "monke:play-mode";
 
 export function PlayModeProvider({ children }: { children: ReactNode }) {
-  const [mode, setModeState] = useState<PlayMode | null>(null);
-  const [ready, setReady] = useState(false);
+  const [mode, setModeState] = useState<PlayMode>("demo");
+  const [ready, setReady] = useState(true);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(KEY);
     if (stored === "demo" || stored === "devnet") setModeState(stored);
-    setReady(true);
+    else window.localStorage.setItem(KEY, "demo");
   }, []);
 
   const setMode = useCallback((next: PlayMode) => {
@@ -40,8 +40,11 @@ export function PlayModeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const reset = useCallback(() => {
-    setModeState(null);
-    window.localStorage.removeItem(KEY);
+    setModeState((current) => {
+      const next: PlayMode = current === "devnet" ? "demo" : "devnet";
+      window.localStorage.setItem(KEY, next);
+      return next;
+    });
   }, []);
 
   const value = useMemo(

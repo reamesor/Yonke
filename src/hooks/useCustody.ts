@@ -104,7 +104,7 @@ export function useCustody() {
         return { ok: false, error: st?.disabledReason || "DEVNET custody is not enabled." };
       }
       if (st.cluster !== "devnet") {
-        return { ok: false, error: "Wrong network — Yonke custody is DEVNET only." };
+        return { ok: false, error: "Wrong network — Monke custody is DEVNET only." };
       }
 
       const lamports = solToLamports(amountSol);

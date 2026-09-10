@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
 const LETTERS = [
-  { ch: "Y", r: "-7deg", y: "0.06em", kick: "11deg" },
+  { ch: "M", r: "-7deg", y: "0.06em", kick: "11deg" },
   { ch: "O", r: "3deg", y: "-0.05em", kick: "-10deg" },
   { ch: "N", r: "-2deg", y: "0.04em", kick: "8deg" },
   { ch: "K", r: "6deg", y: "-0.04em", kick: "-12deg" },
@@ -15,7 +15,7 @@ type WordmarkProps = {
 
 export function Wordmark({ size = "nav", className = "" }: WordmarkProps) {
   return (
-    <span className={`wordmark wordmark--${size} ${className}`} aria-label="Yonke">
+    <span className={`wordmark wordmark--${size} ${className}`} aria-label="Monke">
       <span className="wordmark-line" aria-hidden>
         {LETTERS.map((l) => (
           <span

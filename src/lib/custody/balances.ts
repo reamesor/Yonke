@@ -29,7 +29,7 @@ type StoreBlob = {
   txs: CustodyTxRecord[];
 };
 
-const REDIS_KEY = "yonke:custody:v1";
+const REDIS_KEY = "monke:custody:v1";
 const FILE_NAME = "custody-balances.json";
 const MEM: StoreBlob = { accounts: {}, creditedSigs: {}, txs: [] };
 
@@ -170,7 +170,7 @@ export async function debitForWithdraw(opts: {
   const store = await readStore();
   const prev = store.accounts[opts.pubkey]?.balanceLamports ?? 0;
   if (amount > prev) {
-    return { ok: false, error: "Insufficient Yonke DEVNET play balance." };
+    return { ok: false, error: "Insufficient Monke DEVNET play balance." };
   }
   const next = prev - amount;
   const holdId = `wdr-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

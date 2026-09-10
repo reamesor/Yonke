@@ -17,8 +17,8 @@ const bagel = Bagel_Fat_One({
 });
 
 export const metadata: Metadata = {
-  title: "Yonke — Colors",
-  description: "Yonke is a Colors betting game. Warm paper, grain, pastel ghosts.",
+  title: "Monke — Colors",
+  description: "Monke is a Colors betting game. Warm paper, grain, pastel ghosts.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="shell">
             <header className="topbar">
               <div className="brand-cluster">
-                <a href="/" aria-label="Yonke">
+                <a href="/" aria-label="Monke">
                   <Wordmark size="nav" />
                 </a>
                 <p className="chip">Colors</p>
