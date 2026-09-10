@@ -2,14 +2,18 @@
 
 import type { ColorKey } from "@/lib/colors/engine";
 
-/** Cropped tiles from the uploaded NFT sheet — one portrait per Colors face. */
+/** High-res NFT portraits, backgrounds included. */
 export const GHOST_SRC: Record<ColorKey, string> = {
   yellow: "/ghosts/yellow.jpg",
   orange: "/ghosts/orange.jpg",
   pink: "/ghosts/pink.jpg",
   blue: "/ghosts/blue.jpg",
-  green: "/ghosts/green.jpg",
+  green: "/ghosts/green.mp4",
   red: "/ghosts/red.jpg",
+};
+
+export const GHOST_POSTER: Partial<Record<ColorKey, string>> = {
+  green: "/ghosts/green.jpg",
 };
 
 type GhostProps = {
@@ -29,25 +33,26 @@ export function Ghost({
   hit,
   miss,
 }: GhostProps) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      className={`ghost ${tumbling ? "is-tumbling" : ""} ${hit ? "is-hit" : ""} ${miss ? "is-miss" : ""} ${selected ? "is-selected" : ""} ${className}`}
-      src={GHOST_SRC[color]}
-      alt=""
-      draggable={false}
-    />
-  );
-}
+  const src = GHOST_SRC[color];
+  const cls = `ghost ${tumbling ? "is-tumbling" : ""} ${hit ? "is-hit" : ""} ${miss ? "is-miss" : ""} ${selected ? "is-selected" : ""} ${className}`;
 
-export function GhostPeek({ className = "" }: { className?: string }) {
+  if (src.endsWith(".mp4")) {
+    return (
+      <video
+        className={cls}
+        src={src}
+        poster={GHOST_POSTER[color]}
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden
+      />
+    );
+  }
+
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img
-      className={`ghost-peek ${className}`}
-      src="/ghosts/pink.jpg"
-      alt=""
-      draggable={false}
-    />
+    <img className={cls} src={src} alt="" draggable={false} />
   );
 }

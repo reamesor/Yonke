@@ -253,6 +253,9 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: cover;
 }
+video.ghost {
+  background: #000;
+}
 .ghost.is-tumbling { animation: tumble 0.55s ease-in-out infinite; }
 .ghost.is-hit { transform: translateY(-6px) scale(1.06); }
 .ghost.is-miss { opacity: 0.4; }
@@ -449,6 +452,29 @@ a { color: inherit; text-decoration: none; }
   color: var(--orange);
 }
 
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.section-spine {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--muted) 0 4px,
+    transparent 4px 8px
+  );
+}
+
 .meters {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -462,6 +488,15 @@ a { color: inherit; text-decoration: none; }
 .meter {
   border: 1px solid var(--muted);
   padding: 0.45rem 0.5rem;
+  position: relative;
+}
+
+.meter-num {
+  display: block;
+  color: var(--blue);
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 0.25rem;
 }
 
 .meter b {
